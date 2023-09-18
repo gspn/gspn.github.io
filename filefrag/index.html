@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FileFrags</title>
+
+    <link rel="stylesheet" href="/style/shadow.css">
+    <script src="./src/cbor.min.js"></script>
+    <script src="./src/filefrag.js"></script>
+    <script src="./src/index.js" defer></script>
+
+    <script src="./builders/manual.js"></script>
+</head>
+<body>
+    <h1>FileFrag</h1>
+    <h2>split and stitch files</h2>
+    <p>
+        ----------------------------------------<br><br>
+        file to be split or record to be downloaded<br>
+        <input type="file" id="fi"><br><br>
+        ----------------------------------------<br><br>
+        <b>Download:</b>
+        <button onclick="downloadfromrecord()">download from record</button><br>
+        ----------------------------------------<br><br>
+        <b>Create:</b><br>
+        step 1: fragment file<br>
+        <input type="number" id="kbpb" placeholder="max kB per block">
+        <input type="number" id="bpp" placeholder="max blocks per page">
+        <button onclick="storeFragments()">create fragments</button>
+        <br>
+        step 2: choose a record builder or do it manually
+        <button onclick="filefragManualProcess()">manual record creation</button>
+        ----------------------------------------<br><br>
+        <b>Info</b><br>
+        <p id="fragout" style="background:#ffffff4f;width:24rem;">none loaded</p>
+    </p>
+    <h4></h4>
+</body>
+</html>
