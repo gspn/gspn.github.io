@@ -88,8 +88,15 @@ addEventListener('activate', event => {
 });
 
 addEventListener('fetch', event => {
+	let request = event.request.clone();
+
+	// strip hash, for use in cache
+	const urlWithoutHash = new URL(request.url);
+	urlWithoutHash.hash = '';
+	request = new Request(urlWithoutHash, { ...request });
+
 	event.respondWith(
-		caches.match(event.request)
+		caches.match(request)
 			.then((response) => response || fetch(event.request))
 	);
 });
