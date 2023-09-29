@@ -2,6 +2,7 @@ const cacheVersion = "v0.0.1";
 const preCacheList = [
 	'/index.html',
 	'/style/shadow.css',
+	'/style/layout.css',
 	'/src/comms.js',
 	'https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'
 ];
