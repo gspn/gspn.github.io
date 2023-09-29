@@ -1,5 +1,6 @@
 const cacheVersion = "v0.0.1";
 const preCacheList = [
+	'/',
 	'/index.html',
 	'/style/shadow.css',
 	'/style/layout.css',
