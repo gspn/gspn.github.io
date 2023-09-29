@@ -31,19 +31,12 @@ const instructionManager = (action, data) => new Promise(async (res, rej) => {
 const ready = new Promise((res, rej) => {
 	if (!'serviceWorker' in navigator) rej('Service Worker API not available, for some reason.');
 
-	// const initialise = () => {
-	// 	const sw = navigator.serviceWorker;
-	// 	sw.addEventListener("message", m => console.log("vwomp! ", m.data));
-	// 	sw.controller.postMessage({ message: 'Hello from the client!' });
-	// };
-
 	// reattach listners on change
 	navigator.serviceWorker.addEventListener('controllerchange', () => initialise());
 
 	// register
 	navigator.serviceWorker.register('/sw.js').then((registration) => {
 		console.log('Service Worker registered with scope:', registration.scope);
-		initialise();
 		res(true);
 	}).catch((error) => {
 		res(false)
