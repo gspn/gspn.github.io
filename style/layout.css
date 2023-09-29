@@ -7,14 +7,16 @@ body {
 	height: 100vh;
 
 	display: grid;
-	grid-template-rows: 1fr 9fr;
-	grid-template-columns: 1fr minmax(350px, 900px) 1fr;
+	grid-template-rows: 1fr 11fr;
+	grid-template-columns: 1fr minmax(350px, 700px) 1fr;
 }
 
 header {
-	grid-area: 1/1/1/4;
+	grid-area: 1/2;
+	border-bottom: dotted 1px var(--lessdark)
 }
 
 .main {
 	grid-area: 2/2;
+	padding-top: 50px;
 }

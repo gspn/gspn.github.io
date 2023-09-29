@@ -7,6 +7,13 @@
 /*font*/
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
+/* theme colours */
+:root {
+  --dark: #292929;
+  --darker: #171717;
+  --lessdark: #383838;
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale
@@ -36,7 +43,7 @@ button {
 
 /*everything else*/
 body {
-  background-color: #171717;
+  background-color: var(--darker);
   font-family: 'Share Tech Mono';
   color: white;
   padding-left: 10px;
@@ -49,20 +56,20 @@ a {
 }
 
 a:hover {
-  background-color: #383838;
+  background-color: var(--lessdark);
 }
 
 input,
 select {
   font-family: 'Share Tech Mono';
   color: #b6b7b7;
-  background-color: #292929;
+  background-color: var(--dark);
   transition: 300ms;
 }
 
 button {
   font-family: 'Share Tech Mono';
-  background-color: #292929;
+  background-color: var(--dark);
   color: #ccc;
   text-align: center;
   text-decoration: none;
@@ -74,7 +81,7 @@ button {
 
 button:hover {
   text-shadow: #fff 0 0 0.5rem, rgba(255, 255, 255, 0.7) 0 0 5rem, slategray 0 0 6rem;
-  background-color: #383838;
+  background-color: var(--lessdark);
 }
 
 code {
