@@ -1,20 +1,23 @@
-// router
+// sets up router and handles page changes
 
-import routie from "./routie.min.js"; // ancient, but it works, and it definitely won't change.
+import Router from "./router.js";
 import pages from "/pages/0.js";
 
-const loadPage = function(){
+const loadPage = function () {
 
 };
 
-const listPages = function({filter, showtags, showinvis}){
+const listPages = function ({ filter, showtags, showinvis }) {
 
-}
+};
 
-routie({
-	"": function(){
+const route = new Router();
 
-	}
-})
+route
+	.get("", () => route.navigateTo("/"))
+	//.get("/", () => loadPage("welcome"))
+	//.get("/list", () => listPages())
 
-window.gspnp = {}
+route.start();
+
+window.gspnp = { route };
