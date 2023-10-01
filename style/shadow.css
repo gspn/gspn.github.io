@@ -19,6 +19,11 @@ html {
   -moz-osx-font-smoothing: grayscale
 }
 
+body {
+  font-weight: 400;
+  font-size: 17px;
+}
+
 /* ua defaults for consistency */
 button {
   appearance: auto;
@@ -52,11 +57,12 @@ body {
 a {
   font-family: 'Share Tech Mono';
   color: #ccc;
-
+  text-decoration: none;
 }
 
 a:hover {
   background-color: var(--lessdark);
+  text-decoration: underline;
 }
 
 input,
