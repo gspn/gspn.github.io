@@ -17,10 +17,18 @@ body {
 
 header {
 	grid-area: 1/2;
-	border-bottom: dotted 1px var(--lessdark)
+	border-bottom: dotted 1px var(--lessdark);
+
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
 }
 
 .main {
 	grid-area: 2/2;
 	padding-top: 50px;
+}
+
+.spacer {
+	white-space: pre;
 }
