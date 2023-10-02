@@ -8,15 +8,17 @@ const loadPage = async function (key) {
 	if (!p) throw "Sorry m8, can't find that";
 
 	const content = await fetch(`/pages/${key}/index.html`)
-		.then(res => res.text())
+		.then(res => res.ok ? res.text() : `Sorry m8, ERROR ${res.status}`)
 		.catch(e => new Error("Sorry m8: ", e))
 
 	document.querySelector(".main").innerHTML = content;
 	document.title = p.title;
 };
 
-const listPages = function ({ query, showtags, showinvis }) {
-	document.title = "GSPN - List";
+const listPages = async function ({ query, showtags, showinvis }) {
+	// load list page and get element references
+	await loadPage("list");
+	const list = document.querySelector(".arlist");
 
 	const lowerQuery = query === null ? query : query.toLowerCase();
 
@@ -45,17 +47,9 @@ const listPages = function ({ query, showtags, showinvis }) {
 	})();
 
 	// displaying the list
-	const main = document.querySelector(".main");
-	main.innerHTML = "";
-
-	const list = document.createElement("ul");
-	list.className = "arlist";
-
 	matches.forEach(([key, entry]) => {
 		list.insertAdjacentHTML('beforeend', `<li><a href="/pages/${key}">${entry.name}</a></li>`);
 	});
-
-	main.append(list);
 };
 
 const route = new Router();

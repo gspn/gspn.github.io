@@ -5,6 +5,11 @@ export default {
 		name: "WELCOME PAGE",
 		tags: ["invis"]
 	},
+	list: {
+		title: "GSPN - List",
+		name: "PAGE LIST",
+		tags: ["invis"]
+	},
 	config: {
 		title: "GSPN - Config",
 		name: "CONFIG PANEL",
