@@ -7,11 +7,12 @@ const loadPage = async function (key) {
 	const p = pages[key];
 	if (!p) throw "Sorry m8, can't find that";
 
-	const content = await fetch(`/pages/${p.home}/index.html`)
+	const content = await fetch(`/pages/${key}/index.html`)
 		.then(res => res.text())
 		.catch(e => new Error("Sorry m8: ", e))
 
 	document.querySelector(".main").innerHTML = content;
+	document.title = p.title;
 };
 
 const listPages = function ({ query, showtags, showinvis }) {
@@ -61,7 +62,7 @@ route
 	.get("", () => route.navigateTo("/"))
 	.get("/", () => loadPage("welcome"))
 	.get("/list", () => listPages({ query: null, showinvis: false }))
-//.get("/page")
+	.get("/pages/:key", (params) => loadPage(params.key))
 
 route.start();
 
