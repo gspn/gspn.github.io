@@ -1,10 +1,11 @@
 export default {
+	// system pages
 	welcome: {
 		title: "GSPN - Welcome",
 		name: "WELCOME PAGE",
 		tags: ["invis"],
-		home: "welcome/"
-	}
+		home: "welcome"
+	},
 };
 /**
  * Spooky lil INSTRUCTIONS! BWAH!
