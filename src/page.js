@@ -14,8 +14,45 @@ const loadPage = async function (key) {
 	document.querySelector(".main").innerHTML = content;
 };
 
-const listPages = function ({ filter, showtags, showinvis }) {
+const listPages = function ({ query, showtags, showinvis }) {
+	const lowerQuery = query === null ? query : query.toLowerCase();
 
+	// filtering the entries
+	const matches = (function () {
+		// invisibles
+		let matches = showinvis
+			? Object.entries(pages)
+			: Object.entries(pages).filter(([key, page]) => !page.tags.includes("invis"))
+
+		// matching
+		matches = query === null
+			? matches
+			: matches.filter(([key, page]) => {
+				const lowerItem = page.toLowerCase();
+
+				const words = lowerQuery.split(' ');
+
+				// Check if all words in the query are present in the item (in any order)
+				return words.every(word => lowerItem.includes(word));
+
+				//TODO add tag filtering
+			});
+
+		return matches;
+	})();
+
+	// displaying the list
+	const main = document.querySelector(".main");
+	main.innerHTML = "";
+
+	const list = document.createElement("ul");
+	list.className = "arlist";
+
+	matches.forEach(([key, entry]) => {
+		list.insertAdjacentHTML('beforeend', `<li><a href="/pages/${key}">${entry.name}</a></li>`);
+	});
+
+	main.append(list);
 };
 
 const route = new Router();
@@ -23,7 +60,8 @@ const route = new Router();
 route
 	.get("", () => route.navigateTo("/"))
 	.get("/", () => loadPage("welcome"))
-//.get("/list", () => listPages())
+	.get("/list", () => listPages({ query: null, showinvis: false }))
+//.get("/page")
 
 route.start();
 
