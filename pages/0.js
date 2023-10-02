@@ -3,8 +3,19 @@ export default {
 	welcome: {
 		title: "GSPN - Welcome",
 		name: "WELCOME PAGE",
-		tags: ["invis"],
-		home: "welcome"
+		tags: ["invis"]
+	},
+	config: {
+		title: "GSPN - Config",
+		name: "CONFIG PANEL",
+		tags: ["invis"]
+	},
+
+	// content pages
+	touhou: {
+		title: "Touhou",
+		name: "ALL TOUHOU GAMES",
+		tags: ["game", "exe"]
 	},
 };
 /**
