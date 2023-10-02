@@ -16,6 +16,8 @@ const loadPage = async function (key) {
 };
 
 const listPages = function ({ query, showtags, showinvis }) {
+	document.title = "GSPN - List";
+
 	const lowerQuery = query === null ? query : query.toLowerCase();
 
 	// filtering the entries
