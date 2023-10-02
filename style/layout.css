@@ -32,3 +32,11 @@ header {
 .spacer {
 	white-space: pre;
 }
+
+.arlist {
+	list-style-type: none;
+	padding: 0;
+}
+.arlist > li {
+	list-style: none;
+}
