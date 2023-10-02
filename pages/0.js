@@ -1,7 +1,7 @@
 export default {
 	welcome: {
 		title: "GSPN - Welcome",
-		name: "",
+		name: "WELCOME PAGE",
 		tags: ["invis"],
 		home: "welcome/"
 	}
