@@ -48,7 +48,7 @@ const listPages = async function ({ query, showtags, showinvis }) {
 
 	// displaying the list
 	matches.forEach(([key, entry]) => {
-		list.insertAdjacentHTML('beforeend', `<li><a href="/pages/${key}">${entry.name}</a></li>`);
+		list.insertAdjacentHTML('beforeend', `<li><a href="/pages/${key}/">${entry.name}</a></li>`);
 	});
 };
 
@@ -58,7 +58,8 @@ route
 	.get("", () => route.navigateTo("/"))
 	.get("/", () => loadPage("welcome"))
 	.get("/list", () => listPages({ query: null, showinvis: false }))
-	.get("/pages/:key", (params) => loadPage(params.key))
+	.get("/pages/:key/", (params) => loadPage(params.key))
+	.get("/pages/:key/d/:file", (params) => window.open(`pages/${params.key}/${params.file}`, "_blank"))
 
 route.start();
 
