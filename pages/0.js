@@ -22,6 +22,11 @@ export default {
 		name: "THE EMULATORS LIST",
 		tags: ["exe"]
 	},
+	persona3: {
+		title: "P3",
+		name: "PERSONA 3",
+		tags: ["game", "exe"]
+	},
 	touhou: {
 		title: "Touhou",
 		name: "ALL TOUHOU GAMES",
