@@ -17,6 +17,11 @@ export default {
 	},
 
 	// content pages
+	emulators: {
+		title: "Emulators",
+		name: "THE EMULATORS LIST",
+		tags: ["exe"]
+	},
 	touhou: {
 		title: "Touhou",
 		name: "ALL TOUHOU GAMES",
