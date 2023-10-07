@@ -1,11 +1,16 @@
 const cacheVersion = "v0.0.1";
 const preCacheList = [
+	// base
 	'/',
 	'/index.html',
 	'/style/shadow.css',
 	'/style/layout.css',
 	'/src/comms.js',
-	'https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap'
+	'https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap',
+
+	// system pages
+	'/pages/welcome/index.html',
+	'/pages/list/index.html',
 ];
 
 // handlers
