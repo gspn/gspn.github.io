@@ -58,9 +58,9 @@ route
 	.get("", () => route.navigateTo("/"))
 	.get("/", () => loadPage("welcome"))
 	.get("/list", () => listPages({ query: null, showinvis: false }))
+	.get("/pages/", () => route.navigateTo("/list"))
 	.get("/pages/:key/", (params) => loadPage(params.key))
 	.get("/pages/:key/d/:file", (params) => window.open(`pages/${params.key}/${params.file}`, "_blank"))
-
-route.start();
+	.start();
 
 window.gspnp = { route };
