@@ -181,6 +181,9 @@ export default class Cicero {
 			}
 		});
 
+		// Listen for state changes
+		window.addEventListener('popstate', (e) => this.navigate());
+
 		return this;
 	};
 };
