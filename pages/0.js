@@ -32,6 +32,11 @@ export default {
 		name: "ALL TOUHOU GAMES",
 		tags: ["game", "exe"]
 	},
+	filefrag: {
+		name: "FILEFRAG V1",
+		tags: ["tool"],
+		ex: true
+	}
 };
 /**
  * Spooky lil INSTRUCTIONS! BWAH!
