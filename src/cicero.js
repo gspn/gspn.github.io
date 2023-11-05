@@ -121,7 +121,8 @@ export default class Cicero {
 				"http://foo"
 			)
 		).pathname;
-		location.reload();
+		//location.reload();
+		this.navigate();
 	}
 
 	/**
