@@ -19,6 +19,7 @@ const loadPage = async function (key) {
 
 const route = new Cicero();
 route
+	.redirect("", "/")
 	.route("/", () => loadPage("welcome"))
 
 	.redirect("/pages/", "/list")

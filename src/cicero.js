@@ -8,7 +8,6 @@ export default class Cicero {
 	constructor(root = "/") {
 		this.routes = [];
 		this.root = root;
-		location.hash = "/";
 	}
 
 	//
@@ -46,7 +45,7 @@ export default class Cicero {
 	 * @param {String} path The path to redirect to
 	 */
 	redirect(fragment, path) {
-		return this.route(fragment, () => this.navigateTo(path));
+		return this.route(fragment, () => this.navigateTo(path) && this.navigate());
 	}
 
 	//
