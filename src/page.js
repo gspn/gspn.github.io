@@ -18,10 +18,10 @@ const loadPage = async function (key) {
 const route = new Cicero();
 route
 	.redirect("", "/")
-	.get("/", "/pages/welcome/index.html", ".main")
+	.route("/", () => loadPage("welcome"))
 
 	.redirect("/pages/", "/list")
-	.get("/list", "/pages/list/index.html", ".main")
+	.route("/list", () => loadPage("list"))
 
 	.route("/pages/:key/", (params) => loadPage(params.key))
 	.route("/pages/:key/d/:file", (params) => window.open(`pages/${params.key}/${params.file}`, "_blank"))
