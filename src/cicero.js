@@ -121,6 +121,7 @@ export default class Cicero {
 				"http://foo"
 			)
 		).pathname;
+		return true;
 	}
 
 	/**
