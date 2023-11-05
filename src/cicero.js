@@ -62,14 +62,12 @@ export default class Cicero {
 		const newdoc = formatDocument(html);
 
 		// merge heads
-		const { staleNodes, freshNodes } = partitionNodes(document.head.childNodes, newdoc.head.childNodes);
-		//staleNodes.forEach((node) => node.remove());
-		document.head.append(...freshNodes);
+		document.head.append(...newdoc.head.childNodes);
 
 		// change target/body
 		target.innerHTML = "";
 		target.append(...newdoc.body.childNodes);
-		target.querySelectorAll("script").forEach(replaceAndRunScript);
+		target.querySelectorAll("script").forEach(Cicero.replaceAndRunScript);
 
 		//
 		// helpers (mostly ripped from fireship's flamethrower)
@@ -77,18 +75,15 @@ export default class Cicero {
 			const parser = new DOMParser();
 			return parser.parseFromString(html, 'text/html');
 		}
-		function replaceAndRunScript(oldScript) {
-			const newScript = document.createElement('script');
-			const attrs = Array.from(oldScript.attributes);
-			for (const { name, value } of attrs) {
-				newScript[name] = value;
-			}
-			newScript.append(oldScript.textContent);
-			oldScript.replaceWith(newScript);
+	}
+	static replaceAndRunScript(oldScript) {
+		const newScript = document.createElement('script');
+		const attrs = Array.from(oldScript.attributes);
+		for (const { name, value } of attrs) {
+			newScript[name] = value;
 		}
-		function partitionNodes(n, e) {
-			for (var i = [], r = [], u = 0, t = 0; u < n.length || t < e.length;)!function () { var o = n[u], s = e[t]; if (null == o ? void 0 : o.isEqualNode(s)) return u++, t++, "continue"; var d = o ? r.findIndex(function (n) { return n.isEqualNode(o) }) : -1; if (-1 !== d) return r.splice(d, 1), u++, "continue"; var f = s ? i.findIndex(function (n) { return n.isEqualNode(s) }) : -1; if (-1 !== f) return i.splice(f, 1), t++, "continue"; o && i.push(o), s && r.push(s), u++, t++ }(); return { staleNodes: i, freshNodes: r }
-		}
+		newScript.append(oldScript.textContent);
+		oldScript.replaceWith(newScript);
 	}
 
 	//
