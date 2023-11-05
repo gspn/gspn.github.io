@@ -31,9 +31,6 @@ const instructionManager = (action, data) => new Promise(async (res, rej) => {
 const ready = new Promise((res, rej) => {
 	if (!'serviceWorker' in navigator) rej('Service Worker API not available, for some reason.');
 
-	// reattach listners on change
-	navigator.serviceWorker.addEventListener('controllerchange', () => initialise());
-
 	// register
 	navigator.serviceWorker.register('/sw.js').then((registration) => {
 		console.log('Service Worker registered with scope:', registration.scope);
