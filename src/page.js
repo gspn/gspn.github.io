@@ -28,7 +28,6 @@ route
 	.route("/config", () => loadPage("config"))
 
 	.route("/pages/:key/", (params) => loadPage(params.key))
-	.route("/pages/:key/d/:file", (params) => window.open(`pages/${params.key}/${params.file}`, "_blank"))
 
 	.start();
 
