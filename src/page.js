@@ -9,10 +9,12 @@ const loadPage = async function (key) {
 
 	const content = await fetch(`/pages/${key}/index.html`)
 		.then(res => res.ok ? res.text() : `Sorry m8, ERROR ${res.status}`)
-		.catch(e => new Error("Sorry m8: ", e))
+		.catch(e => new Error("Sorry m8: ", e));
 
-	document.querySelector(".main").innerHTML = content;
+	const main = document.querySelector(".main")
+	main.innerHTML = content;
 	document.title = p.title;
+	main.querySelectorAll("script").forEach(Cicero.replaceAndRunScript);
 };
 
 const route = new Cicero();
