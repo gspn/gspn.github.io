@@ -1,6 +1,6 @@
 // sets up router and handles page changes
 
-import Router from "./router.js";
+import Cicero from "./cicero.js";
 import pages from "/pages/0.js";
 
 const loadPage = async function (key) {
@@ -15,52 +15,17 @@ const loadPage = async function (key) {
 	document.title = p.title;
 };
 
-const listPages = async function ({ query, showtags, showinvis }) {
-	// load list page and get element references
-	await loadPage("list");
-	const list = document.querySelector(".arlist");
-
-	const lowerQuery = query === null ? query : query.toLowerCase();
-
-	// filtering the entries
-	const matches = (function () {
-		// invisibles
-		let matches = showinvis
-			? Object.entries(pages)
-			: Object.entries(pages).filter(([key, page]) => !page.tags.includes("invis"))
-
-		// matching
-		matches = query === null
-			? matches
-			: matches.filter(([key, page]) => {
-				const lowerItem = page.toLowerCase();
-
-				const words = lowerQuery.split(' ');
-
-				// Check if all words in the query are present in the item (in any order)
-				return words.every(word => lowerItem.includes(word));
-
-				//TODO add tag filtering
-			});
-
-		return matches;
-	})();
-
-	// displaying the list
-	matches.forEach(([key, entry]) => {
-		list.insertAdjacentHTML('beforeend', `<li><a href="/pages/${key}/">${entry.name}</a></li>`);
-	});
-};
-
-const route = new Router();
-
+const route = new Cicero();
 route
-	.get("", () => route.navigateTo("/"))
-	.get("/", () => loadPage("welcome"))
-	.get("/list", () => listPages({ query: null, showinvis: false }))
-	.get("/pages/", () => route.navigateTo("/list"))
-	.get("/pages/:key/", (params) => loadPage(params.key))
-	.get("/pages/:key/d/:file", (params) => window.open(`pages/${params.key}/${params.file}`, "_blank"))
+	.redirect("", "/")
+	.get("/", "/pages/welcome/index.html", ".main")
+
+	.redirect("/pages/", "/list")
+	.get("/list", "/pages/list/index.html", ".main")
+
+	.route("/pages/:key/", (params) => loadPage(params.key))
+	.route("/pages/:key/d/:file", (params) => window.open(`pages/${params.key}/${params.file}`, "_blank"))
+
 	.start();
 
 window.gspnp = { route };
