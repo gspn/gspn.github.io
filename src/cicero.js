@@ -121,8 +121,6 @@ export default class Cicero {
 				"http://foo"
 			)
 		).pathname;
-		//location.reload();
-		this.navigate();
 	}
 
 	/**
@@ -178,7 +176,7 @@ export default class Cicero {
 		});
 
 		// Listen for state changes
-		window.addEventListener('popstate', (e) => this.navigate());
+		window.addEventListener('popstate', () => this.navigate());
 
 		return this;
 	};
