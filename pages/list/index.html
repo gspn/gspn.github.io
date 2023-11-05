@@ -5,10 +5,10 @@
 </p>
 
 <div>
-	<input type="text">
+	<input type="text" id="queryinput">
 	<input type="checkbox" id="showtags"><label for="showtags">show tags</label>
 	<input type="checkbox" id="showinvis"><label for="showinvis">show system pages</label>
-	<button>filter</button>
+	<button id="filter">filter</button>
 </div>
 
 <br>
@@ -18,11 +18,21 @@
 
 <script type="module">
 	import pages from "/pages/0.js";
+
+	//
+	// Show the list
+	//
 	const listPages = async function ({ query, showtags, showinvis }) {
 		// get element references
 		const list = document.querySelector(".arlist");
 
-		const lowerQuery = query === null ? query : query.toLowerCase();
+		// regex
+		const result = query?.match(/(\[(?<tags>[\w\s,]+)\])?\s*(?<query>.+)?/);
+		const mquery = result?.groups.query?.trim();
+		const tags = result?.groups.tags?.replace(/\s/g, "").split(",");
+
+		console.log({query, result, mquery, tags});
+		const lowerQuery = mquery ? mquery.toLowerCase() : null;
 
 		// filtering the entries
 		const matches = (function () {
@@ -31,11 +41,16 @@
 				? Object.entries(pages)
 				: Object.entries(pages).filter(([key, page]) => !page.tags.includes("invis"))
 
-			// matching
-			matches = query === null
+			// tag matching
+			matches = tags
+				? matches.filter(([key, page]) => tags.every(tag => page.tags.includes(tag)))
+				: matches
+
+			// query matching
+			matches = lowerQuery === null
 				? matches
 				: matches.filter(([key, page]) => {
-					const lowerItem = page.toLowerCase();
+					const lowerItem = page.name.toLowerCase();
 
 					const words = lowerQuery.split(' ');
 
@@ -49,9 +64,25 @@
 		})();
 
 		// displaying the list
+		list.innerHTML = "";
 		matches.forEach(([key, entry]) => {
-			list.insertAdjacentHTML('beforeend', `<li><a href="/pages/${key}/">${entry.name}</a></li>`);
+			list.insertAdjacentHTML('beforeend', `<li>
+				${showtags ? `[${entry.tags.toString().replace(/,/g, ", ")}]` : ""}
+				<a href="/pages/${key}/">${entry.name}</a>
+			</li>`);
 		});
 	};
+	// initial list
 	listPages({ query: null, showinvis: false });
+
+	// listen
+	const queryinput = document.querySelector("#queryinput");
+	const showtagsbox = document.querySelector("#showtags");
+	const showinvisbox = document.querySelector("#showinvis");
+	const filterbutton = document.querySelector("#filter");
+	filterbutton.addEventListener("click", () => listPages({
+		query: queryinput.value || null,
+		showinvis: showinvisbox.checked,
+		showtags: showtagsbox.checked
+	}));
 </script>
