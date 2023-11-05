@@ -7,6 +7,8 @@ const loadPage = async function (key) {
 	const p = pages[key];
 	if (!p) throw "Sorry m8, can't find that";
 
+	if(p.ex === true) return location.replace(`/pages/${key}/index.html`);
+
 	const content = await fetch(`/pages/${key}/index.html`)
 		.then(res => res.ok ? res.text() : `Sorry m8, ERROR ${res.status}`)
 		.catch(e => new Error("Sorry m8: ", e));
