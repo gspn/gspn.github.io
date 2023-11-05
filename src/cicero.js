@@ -5,10 +5,14 @@ export default class Cicero {
 	 * Creates a cicero router instance
 	 * @param {String} root The root of the application that will use the router. Defaults to /.
 	 */
-	constructor(root = "/"){
+	constructor(root = "/") {
 		this.routes = [];
 		this.root = root;
 	}
+
+	//
+	// Route creators
+	//
 
 	/**
 	 * Add a route to match for
@@ -29,9 +33,10 @@ export default class Cicero {
 	 * Add a route for a document
 	 * @param {String} fragment The path to match for
 	 * @param {String} path The path to the document to load
+	 * @param {String} target Target querystring for node to load document content into. Defaults to "body"
 	 */
-	get(fragment, path){
-		return this.route(fragment, );
+	get(fragment, path, target = "body") {
+		return this.route(fragment, () => this.loadPage(path, document.querySelector(target)));
 	}
 
 	/**
@@ -39,14 +44,61 @@ export default class Cicero {
 	 * @param {String} fragment The path to match for
 	 * @param {String} path The path to redirect to
 	 */
-	redirect(fragment, path){
+	redirect(fragment, path) {
 		return this.route(fragment, () => this.navigateTo(path));
 	}
+
+	//
+	// Document manager
+	//
+
+	/**
+	 * Loads a document
+	 * @param {String} uri The path to the document to load
+	 * @param {Node} target The node to load the document's body into
+	 */
+	async loadPage(uri, target = document.body) {
+		const html = await fetch(uri).then(res => res.text());
+		const newdoc = formatDocument(html);
+
+		// merge heads
+		const { staleNodes, freshNodes } = partitionNodes(document.head.childNodes, newdoc.head.childNodes);
+		//staleNodes.forEach((node) => node.remove());
+		document.head.append(...freshNodes);
+
+		// change target/body
+		target.innerHTML = "";
+		target.append(...newdoc.body.childNodes);
+		target.querySelectorAll("script").forEach(replaceAndRunScript);
+
+		//
+		// helpers (mostly ripped from fireship's flamethrower)
+		function formatDocument(html) {
+			const parser = new DOMParser();
+			return parser.parseFromString(html, 'text/html');
+		}
+		function replaceAndRunScript(oldScript) {
+			const newScript = document.createElement('script');
+			const attrs = Array.from(oldScript.attributes);
+			for (const { name, value } of attrs) {
+				newScript[name] = value;
+			}
+			newScript.append(oldScript.textContent);
+			oldScript.replaceWith(newScript);
+		}
+		function partitionNodes(n, e) {
+			for (var i = [], r = [], u = 0, t = 0; u < n.length || t < e.length;)!function () { var o = n[u], s = e[t]; if (null == o ? void 0 : o.isEqualNode(s)) return u++, t++, "continue"; var d = o ? r.findIndex(function (n) { return n.isEqualNode(o) }) : -1; if (-1 !== d) return r.splice(d, 1), u++, "continue"; var f = s ? i.findIndex(function (n) { return n.isEqualNode(s) }) : -1; if (-1 !== f) return i.splice(f, 1), t++, "continue"; o && i.push(o), s && r.push(s), u++, t++ }(); return { staleNodes: i, freshNodes: r }
+		}
+	}
+
+	//
+	// Navigation and setup
+	//
 
 	/**
 	 * Navigate to the route defined by the current hash
 	 */
-	navigate(){
+	navigate() {
 		const path = this.currentPath();
 
 		for (const route of this.routes) {
@@ -66,7 +118,7 @@ export default class Cicero {
 	 * Sets the hash to the new fragment relative to the current one, then reloads the page
 	 * @param {String} fragment the path to navigate to
 	 */
-	navigateTo(fragment){
+	navigateTo(fragment) {
 		location.hash = new URL(
 			fragment,
 			new URL(
@@ -85,9 +137,31 @@ export default class Cicero {
 		return window.location.hash.slice(1);
 	}
 
-	start(){
+	match(routePath, currentPath) {
+		// Simple path matching with named fields
+		const routeParts = routePath.split('/');
+		const currentParts = currentPath.split('/');
+
+		if (routeParts.length !== currentParts.length) return null;
+
+		const params = {};
+		for (const [i, routePart] of routeParts.entries()) {
+			const currentPart = currentParts[i];
+
+			if (routePart.startsWith(':')) {
+				const paramName = routePart.slice(1);
+				params[paramName] = currentPart;
+			} else if (routePart !== currentPart) {
+				return null;
+			}
+		}
+
+		return params;
+	}
+
+	start() {
 		this.navigate();
-	
+
 		// Capture clicks on <a> links and use the router's route if available
 		document.addEventListener('click', (e) => {
 			if (e.target.tagName === 'A' && e.target.getAttribute('href')) {
