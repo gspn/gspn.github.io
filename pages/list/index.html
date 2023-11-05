@@ -31,7 +31,6 @@
 		const mquery = result?.groups.query?.trim();
 		const tags = result?.groups.tags?.replace(/\s/g, "").split(",");
 
-		console.log({query, result, mquery, tags});
 		const lowerQuery = mquery ? mquery.toLowerCase() : null;
 
 		// filtering the entries
