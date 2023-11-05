@@ -4,9 +4,9 @@ const preCacheList = [
 	'/',
 	'/index.html',
 	'/style/shadow.css',
+	'/style/share_tech_mono.woff2',
 	'/style/layout.css',
 	'/src/comms.js',
-	'https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap',
 
 	// system pages
 	'/pages/welcome/index.html',

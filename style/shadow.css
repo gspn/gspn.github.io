@@ -5,8 +5,11 @@
 /*====================*/
 
 /*font*/
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
+@font-face {
+  font-family: 'Share Tech Mono';
+  src: url('./share_tech_mono.woff2') format('woff2');
+  font-display: swap;
+}
 /* theme colours */
 :root {
   --dark: #292929;
