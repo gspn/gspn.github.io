@@ -8,6 +8,7 @@ export default class Cicero {
 	constructor(root = "/") {
 		this.routes = [];
 		this.root = root;
+		location.hash = "/";
 	}
 
 	//
