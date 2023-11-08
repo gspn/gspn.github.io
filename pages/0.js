@@ -36,6 +36,11 @@ export default {
 		name: "FILEFRAG V1",
 		tags: ["tool"],
 		ex: true
+	},
+	adwars: {
+		title: "The Ad Wars",
+		name: "THE AD WARS (ADBLOCKERS)",
+		tags: ["tool", "privacy", "article"]
 	}
 };
 /**
