@@ -6,108 +6,109 @@
 
 /*font*/
 @font-face {
-  font-family: 'Share Tech Mono';
-  src: url('./share_tech_mono.woff2') format('woff2');
-  font-display: swap;
+	font-family: 'Share Tech Mono';
+	src: url('./share_tech_mono.woff2') format('woff2');
+	font-display: swap;
 }
+
 /* theme colours */
 :root {
-  --dark: #292929;
-  --darker: #171717;
-  --lessdark: #383838;
+	--dark: #292929;
+	--darker: #171717;
+	--lessdark: #383838;
 }
 
 html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale
 }
 
 body {
-  font-weight: 400;
-  font-size: 17px;
+	font-weight: 400;
+	font-size: 17px;
 }
 
 /* ua defaults for consistency */
 button {
-  appearance: auto;
-  text-rendering: auto;
-  letter-spacing: normal;
-  word-spacing: normal;
-  line-height: normal;
-  text-transform: none;
-  text-indent: 0px;
-  text-shadow: none;
-  display: inline-block;
-  text-align: center;
-  align-items: flex-start;
-  cursor: default;
-  box-sizing: border-box;
-  margin: 0em;
-  padding: 1px 6px;
-  border-width: 2px;
-  border-style: outset;
-  border-image: initial;
+	appearance: auto;
+	text-rendering: auto;
+	letter-spacing: normal;
+	word-spacing: normal;
+	line-height: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: center;
+	align-items: flex-start;
+	cursor: default;
+	box-sizing: border-box;
+	margin: 0em;
+	padding: 1px 6px;
+	border-width: 2px;
+	border-style: outset;
+	border-image: initial;
 }
 
 /*everything else*/
 body {
-  background-color: var(--darker);
-  font-family: 'Share Tech Mono';
-  color: white;
-  padding-left: 10px;
+	background-color: var(--darker);
+	font-family: 'Share Tech Mono';
+	color: white;
+	padding-left: 10px;
 }
 
 p {
-  white-space: pre-line;
-  word-wrap: normal;
+	white-space: pre-line;
+	word-wrap: normal;
 }
 
 a {
-  font-family: 'Share Tech Mono';
-  color: #ccc;
-  text-decoration: none;
+	font-family: 'Share Tech Mono';
+	color: #ccc;
+	text-decoration: none;
 }
 
 a:hover {
-  background-color: var(--lessdark);
-  text-decoration: underline;
+	background-color: var(--lessdark);
+	text-decoration: underline;
 }
 
 input,
 select {
-  font-family: 'Share Tech Mono';
-  color: #b6b7b7;
-  background-color: var(--dark);
-  transition: 300ms;
+	font-family: 'Share Tech Mono';
+	color: #b6b7b7;
+	background-color: var(--dark);
+	transition: 300ms;
 }
 
 button {
-  font-family: 'Share Tech Mono';
-  background-color: var(--dark);
-  color: #ccc;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  cursor: pointer;
-  transition: 300ms;
-  text-shadow: #fff 0 0 0.5rem, rgba(255, 255, 255, 0.2) 0 0 5rem;
+	font-family: 'Share Tech Mono';
+	background-color: var(--dark);
+	color: #ccc;
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	cursor: pointer;
+	transition: 300ms;
+	text-shadow: #fff 0 0 0.5rem, rgba(255, 255, 255, 0.2) 0 0 5rem;
 }
 
 button:hover {
-  text-shadow: #fff 0 0 0.5rem, rgba(255, 255, 255, 0.7) 0 0 5rem, slategray 0 0 6rem;
-  background-color: var(--lessdark);
+	text-shadow: #fff 0 0 0.5rem, rgba(255, 255, 255, 0.7) 0 0 5rem, slategray 0 0 6rem;
+	background-color: var(--lessdark);
 }
 
 code {
-  background-color: ivory;
+	background-color: ivory;
 }
 
 input:focus,
 button:focus {
-  outline: white;
-  box-shadow: #fff 0 0 0.5rem, rgba(255, 255, 255, 0.2) 0 0 5rem;
+	outline: white;
+	box-shadow: #fff 0 0 0.5rem, rgba(255, 255, 255, 0.2) 0 0 5rem;
 }
 
 *:focus {
-  outline: none;
+	outline: none;
 }
