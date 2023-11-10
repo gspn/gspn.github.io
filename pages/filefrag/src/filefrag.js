@@ -22,7 +22,8 @@ const filefrag = {
         const frags = [];
 
         for (const uri of blockuris) {
-            const block = await fetch("https://thingproxy.freeboard.io/fetch/" + encodeURI(uri)).then(res => res.blob());
+            console.log("fetching fragment");
+            const block = await fetch(uri).then(res => res.blob());
             frags.push(block);
         };
         return new File([this.joinFragments(frags)], name);
