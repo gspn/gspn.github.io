@@ -8,6 +8,10 @@ const preCacheList = [
 	'/style/layout.css',
 	'/src/comms.js',
 
+	// page
+	'/src/cicero.js',
+	'/src/page.js',
+
 	// system pages
 	'/pages/welcome/index.html',
 	'/pages/list/index.html',
