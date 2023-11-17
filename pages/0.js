@@ -33,7 +33,7 @@ export default {
 		tags: ["game", "exe"]
 	},
 	filefrag: {
-		name: "FILEFRAG V1",
+		name: "FILEFRAG",
 		tags: ["tool"],
 		ex: true
 	},
