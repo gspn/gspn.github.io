@@ -15,6 +15,11 @@ export default {
 		name: "CONFIG PANEL",
 		tags: ["invis"]
 	},
+	caching: {
+		title: "GSPN - Caching & Errors",
+		name: "CACHE & ERRORS",
+		tags: ["invis"]
+	},
 
 	// content pages
 	emulators: {

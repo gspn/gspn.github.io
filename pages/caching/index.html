@@ -1,0 +1,35 @@
+<h1>Caching</h1>
+<h2>What you need to know about running these pages offline</h2>
+
+<h3>Cache icons and tags</h3>
+<p>
+	These little pucks tell you the status of a page in cache:
+<ul>
+	<li><span style="color:grey">UNTRACKED</span> means the page isn't in cache</li>
+	<li><span style="color:green">FRESH</span> means the page has been cached recently (less than a day old)</li>
+	<li><span style="color:yellow">STALE</span> means you should re-cache if you're expecting changes (less than a week
+		old)</li>
+	<li><span style="color:red">OLD</span> means you should definitely re-cache it, unless you're certain nothing
+		important has changed (older than a week)</li>
+	<li><span style="color:red">ERROR</span> means the cache update failed in any way. This is most commonly just trying
+		to update cache while offline.</li>
+</ul>
+You can click the cachetag to attempt an update of the cache for the associated file.
+</p>
+
+<h3>Errors</h3>
+<h4>"Service Worker API not available, for some reason."</h4>
+<p>
+	I don't believe in easy answers. Instead, I specialize in leaving you scratching your head and
+	muttering, "for some reason?" The service worker may or may not be on vacation, but hey, that's the beauty of it. In
+	the end, you'll either fix the problem or become best friends with the refresh button. It's a win-win!
+</p>
+<h4>"Sorry m8: ERROR &lt;number&gt;"</h4>
+<p>
+	This little fella appears when you get an http error when trying to load a page.
+</p>
+<h4>"Error: Sorry m8:"</h4>
+<p>
+	Creature of darkness conjured by trying to access an untracked page offline. Even I don't know why it gets formatted
+	this way.
+</p>
