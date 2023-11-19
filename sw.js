@@ -49,9 +49,10 @@ const instruction = async event => {
 	let ok = false, response;
 	switch (action) {
 		case "cache":
-			await addResourcesToCache(data);
 			response = true;
+			await addResourcesToCache(data).catch(() => response = false);
 			ok = true;
+			break;
 		case "cached":
 			await caches.match(data.url).then(res => response = Boolean(res));
 			ok = true;
