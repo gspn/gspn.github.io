@@ -14,7 +14,7 @@ const ageType = async url => {
 };
 
 // api
-const icon = async uri => {
+const icon = async (uri, reload, istag) => {
 	const el = document.createElement("span");
 	const age = await ageType(uri);
 
@@ -29,7 +29,6 @@ const icon = async uri => {
 				: "red";
 
 	el.addEventListener("click", async () => {
-		const istag = Boolean(el.getAttribute("ctag"));
 		el.style.color = "grey";
 		if (istag) el.innerHTML = "⚫&#xFE0E;CACHING...";
 
@@ -38,16 +37,16 @@ const icon = async uri => {
 			if (istag) el.innerHTML = "⚫&#xFE0E;ERROR";
 		});
 
-		el.replaceWith(await (istag ? tag : icon)(uri));
+		el.replaceWith(await (istag ? tag : icon)(uri, reload));
+		if(reload) location.reload();
 	});
 
 	return el;
 };
-const tag = async uri => {
-	const el = await icon(uri);
+const tag = async (uri, reload) => {
+	const el = await icon(uri, reload, true);
 	const age = el.getAttribute("agetype");
 
-	el.setAttribute("ctag", true);
 	el.innerText += age == -1
 		? "UNTRACKED"
 		: age == 0
