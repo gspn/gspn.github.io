@@ -46,10 +46,6 @@ const instruction = async event => {
 
 	let ok = false, response;
 	switch (action) {
-		case "amicache":
-			await caches.match(client.url).then(res => response = Boolean(res));
-			ok = true;
-			break;
 		case "iscached":
 			await caches.match(data.url).then(res => response = Boolean(res));
 			ok = true;
