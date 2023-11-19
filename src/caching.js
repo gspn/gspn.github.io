@@ -32,13 +32,14 @@ const icon = async (uri, reload, istag) => {
 		el.style.color = "grey";
 		if (istag) el.innerHTML = "⚫&#xFE0E;CACHING...";
 
-		await gspnsw.do("cache", [uri]).catch(() => {
+		const res = await gspnsw.do("cache", [uri]);
+		if (res == false) {
 			el.style.color = "red";
 			if (istag) el.innerHTML = "⚫&#xFE0E;ERROR";
-		});
-
-		el.replaceWith(await (istag ? tag : icon)(uri, reload));
-		if(reload) location.reload();
+		} else {
+			el.replaceWith(await (istag ? tag : icon)(uri, reload));
+			if (reload) location.reload();
+		}
 	});
 
 	return el;
