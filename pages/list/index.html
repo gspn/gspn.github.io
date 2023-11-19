@@ -9,16 +9,14 @@
 	<input type="checkbox" id="showtags"><label for="showtags">show tags</label>
 	<input type="checkbox" id="showinvis"><label for="showinvis">show system pages</label>
 	<button id="filter">filter</button>
+	<p>Index: <span id="indexcache"></span></p>
 </div>
-
-<br>
-<hr>
-
+<hr><br>
 <ul class="arlist"></ul>
 
 <script type="module">
 	import pages from "/pages/0.js";
-	import { icon } from "/src/caching.js";
+	import { icon, tag } from "/src/caching.js";
 
 	//
 	// Show the list
@@ -92,4 +90,7 @@
 		showinvis: showinvisbox.checked,
 		showtags: showtagsbox.checked
 	}));
+
+	// tag for index (0.js)
+	document.querySelector("#indexcache").replaceWith(await tag("/pages/0.js", true));
 </script>
