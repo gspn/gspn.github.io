@@ -46,20 +46,24 @@ const instruction = async event => {
 
 	let ok = false, response;
 	switch (action) {
-		case "iscached":
-			await caches.match(data.url).then(res => response = Boolean(res));
-			ok = true;
-			break;
-		case "clearcache":
-			await clearOldCaches();
-			response = true;
-			ok = true;
-			break;
 		case "cache":
 			await addResourcesToCache(data);
 			response = true;
 			ok = true;
-		case "resetcache":
+		case "cached":
+			await caches.match(data.url).then(res => response = Boolean(res));
+			ok = true;
+			break;
+		case "age":
+			await caches.match(data.url).then(res => response = Math.abs(Date.now() - Date.parse(res.headers.get("Date"))));
+			ok = true;
+			break;
+		case "clear":
+			await clearOldCaches();
+			response = true;
+			ok = true;
+			break;
+		case "reset":
 			await clearOldCaches();
 			await addResourcesToCache(preCacheList);
 			response = true;
