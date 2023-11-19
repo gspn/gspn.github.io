@@ -20,7 +20,7 @@ const instructionManager = (action, data) => new Promise(async (res, rej) => {
 		e.currentTarget.removeEventListener(e.type, handler);
 		clearTimeout(timeoutId);
 
-		if (!e.data.ok) rej("sw.js says it's not ok.")
+		if (!e.data.ok) rej("sw.js says it's not ok.");
 
 		res(e.data.data);
 	});
