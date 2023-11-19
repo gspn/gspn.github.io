@@ -17,6 +17,8 @@ const preCacheList = [
 	// system pages
 	'/pages/welcome/index.html',
 	'/pages/list/index.html',
+	'/pages/config/index.html',
+	'/pages/caching/index.html'
 ];
 
 // handlers
