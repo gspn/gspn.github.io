@@ -11,6 +11,7 @@ const preCacheList = [
 	// page
 	'/src/cicero.js',
 	'/src/page.js',
+	'/src/caching.js',
 
 	// system pages
 	'/pages/welcome/index.html',
