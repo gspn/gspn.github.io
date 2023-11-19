@@ -18,7 +18,7 @@ const loadPage = async function (key) {
 
 	// change cache puck
 	const cachetag = document.querySelector("#cachetag");
-	const ctag = await tag(path);
+	const ctag = await tag(path, true);
 	cachetag.replaceChildren(ctag);
 
 	// display content and load scripts
