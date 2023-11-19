@@ -58,11 +58,6 @@ body {
 	padding-left: 10px;
 }
 
-p {
-	white-space: pre-line;
-	word-wrap: normal;
-}
-
 a {
 	font-family: 'Share Tech Mono';
 	color: #ccc;
