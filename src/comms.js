@@ -41,5 +41,6 @@ const ready = new Promise((res, rej) => {
 	});
 });
 
-
-window.gspnsw = { ready, do: instructionManager };
+const gspnsw = { ready, do: instructionManager }
+window.gspnsw = gspnsw;
+export default gspnsw;
