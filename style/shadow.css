@@ -18,14 +18,24 @@
 	--lessdark: #383838;
 }
 
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
 html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale
 }
 
 body {
+	height: 100vh;
+	background-color: var(--darker);
+	font-family: 'Share Tech Mono';
 	font-weight: 400;
 	font-size: 17px;
+	color: white;
+	padding-left: 10px;
 }
 
 /* ua defaults for consistency */
@@ -51,13 +61,6 @@ button {
 }
 
 /*everything else*/
-body {
-	background-color: var(--darker);
-	font-family: 'Share Tech Mono';
-	color: white;
-	padding-left: 10px;
-}
-
 a {
 	font-family: 'Share Tech Mono';
 	color: #ccc;

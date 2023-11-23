@@ -2,14 +2,7 @@
 	box-sizing: border-box;
 }
 
-html, body {
-	margin: 0;
-	padding: 0;
-}
-
 body {
-	height: 100vh;
-
 	display: grid;
 	grid-template-rows: 4lh 1fr;
 	grid-template-columns: 1fr minmax(350px, 700px) 1fr;
