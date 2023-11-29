@@ -29,7 +29,7 @@ html {
 }
 
 body {
-	height: 100vh;
+	height: 100%;
 	background-color: var(--darker);
 	font-family: 'Share Tech Mono';
 	font-weight: 400;
