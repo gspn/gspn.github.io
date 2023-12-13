@@ -5,11 +5,12 @@ import Cicero from "./cicero.js";
 import pages from "/pages/0.js";
 
 const loadPage = async function (key) {
-	const p = pages[key];
-	if (!p) throw "Sorry m8, can't find that";
-
+	const main = document.querySelector(".main");
+	const cachetag = document.querySelector("#cachetag");
 	const path = `/pages/${key}/index.html`;
 
+	const p = pages[key];
+	if (!p) throw main.innerHTML = "Sorry m8, can't find that";
 	if(p.ex === true) return location.replace(path);
 
 	const content = await fetch(path)
@@ -17,12 +18,10 @@ const loadPage = async function (key) {
 		.catch(e => new Error("Sorry m8: ", e));
 
 	// change cache puck
-	const cachetag = document.querySelector("#cachetag");
 	const ctag = await tag(path, true);
 	cachetag.replaceChildren(ctag);
 
 	// display content and load scripts
-	const main = document.querySelector(".main");
 	main.innerHTML = content;
 	document.title = p.title;
 	main.querySelectorAll("script").forEach(Cicero.replaceAndRunScript);
