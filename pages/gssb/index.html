@@ -1,0 +1,14 @@
+<h1>GhostSub</h1>
+<h2>A very mid IRC-like libp2p based chat client</h2>
+<p>
+	I'm not even sure if it works on WAN. Works fine on LAN and loopback though.<br>
+	Peers share their peer list really innefficiently every 4 seconds.
+	<ul>
+		<li>/join to join a channel. No cache.</li>
+		<li>/nick to change display name. Nothing authenticates or deduplicates.</li>
+		<li>/dial to dial a peer by their address that shows up on start. When in doubt, try them all.</li>
+		<li>/peers to list the connected peers.</li>
+		<li>/stop to make libp2p take a vacation. /start doesn't exist. Cope.</li>
+		<li>/exit to cope.</li>
+	</ul>
+</p>
