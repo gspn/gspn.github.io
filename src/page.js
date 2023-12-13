@@ -4,14 +4,21 @@ import { tag } from "./caching.js";
 import Cicero from "./cicero.js";
 import pages from "/pages/0.js";
 
-const loadPage = async function (key) {
+const loadPage = async function (key, bypassindex = false) {
 	const main = document.querySelector(".main");
 	const cachetag = document.querySelector("#cachetag");
 	const path = `/pages/${key}/index.html`;
 
-	const p = pages[key];
-	if (!p) throw main.innerHTML = "Sorry m8, can't find that";
-	if(p.ex === true) return location.replace(path);
+	const p = bypassindex
+		? {}
+		: pages[key];
+	if (!p && !bypassindex) {
+		main.innerHTML = `Sorry m8, can't find that. <a id="tryhard">Try anyways?</a>`;
+		document.querySelector("#tryhard").onclick = () => loadPage(key, true);
+		throw "Sorry m8, can't find that";
+	}
+
+	if (p.ex === true) return location.replace(path);
 
 	const content = await fetch(path)
 		.then(res => res.ok ? res.text() : `Sorry m8, ERROR ${res.status}`)
