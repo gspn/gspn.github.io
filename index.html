@@ -27,12 +27,24 @@
 		<span style="margin-left:auto" id="cachetag"></span>
 	</header>
 	<div class="main">
-		teehee
+		<div id="teehee" style="visibility:hidden;">
+			teehee
+		</div>
+		<div id="huh" style="visibility:hidden;">
+			if this is your first time, you may need to reload.<br>
+			the url path may lead to a broken or nonexistant page.<br>
+			otherwise, befriend the hard reload. or something.
+		</div>
 		<noscript>
 			I rely on scripts for my routing, workers, and everything else.<br>
 			If they're off for safety or privacy but you want to use the list, you're just gonna have to trust me bro.<br>
 			If you have any doubts, go dig in the repo.
 		</noscript>
+		<script>
+			const show = id => {try{document.querySelector(`#${id}`).style.visibility = "visible";}catch(e){};};
+			setTimeout(() => show("teehee"), 1000);
+			setTimeout(() => show("huh"), 2000);
+		</script>
 	</div>
 </body>
 </html>
