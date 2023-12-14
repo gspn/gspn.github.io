@@ -20,6 +20,7 @@ const icon = async (uri, reload, istag) => {
 
 	el.innerHTML = "⚫&#xFE0E;";
 	el.setAttribute("agetype", age);
+	el.style.cursor = "pointer";
 	el.style.color = age == -1
 		? "grey"
 		: age == 0
