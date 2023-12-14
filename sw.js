@@ -1,4 +1,4 @@
-const cacheVersion = "v0.0.1";
+const cacheVersion = "v0.1.0";
 const preCacheList = [
 	// base
 	'/',
