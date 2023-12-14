@@ -39,6 +39,12 @@ const clearOldCaches = async keep => {
 	);
 };
 
+const listCache = async () => {
+	const cache = await caches.open(cacheVersion);
+	const keys = await cache.keys();
+	return keys.map(k => k.url);
+};
+
 const instruction = async event => {
 	const client = event.source;
 
@@ -61,6 +67,11 @@ const instruction = async event => {
 			break;
 		case "age":
 			await caches.match(data.url).then(res => response = Math.abs(Date.now() - Date.parse(res.headers.get("Date"))));
+			ok = true;
+			break;
+		case "recache":
+			await addResourcesToCache(await listCache());
+			response = true;
 			ok = true;
 			break;
 		case "clear":
