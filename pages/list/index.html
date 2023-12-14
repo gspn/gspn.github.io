@@ -71,7 +71,7 @@
 			const li = document.createElement("li");
 			li.append(
 				await icon(`/pages/${key}/index.html`),
-				showtags ? `[${entry.tags.toString().replace(/,/g, ", ")}]` : "",
+				showtags ? `[${entry.tags.toString().replace(/,/g, ", ")}] ` : "",
 				a
 			);
 			list.append(li);
