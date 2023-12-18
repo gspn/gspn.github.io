@@ -1,0 +1,44 @@
+@import url(./shadow.css);
+
+
+.tabs {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: min-content 1fr;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas:
+		"tabbar"
+		"tabpanel";
+}
+
+.tabradio {
+	display: none;
+}
+
+.tabs > .tabbar {
+	display: flex;
+	flex-flow: row nowrap;
+	grid-area: tabbar;
+}
+
+.tablabel {
+	width: fit-content;
+	border: 1px solid #ffffff4f;
+	cursor: pointer;
+	grid-area: tabbar;
+}
+
+.panel {
+	display: none;
+	width: 100%;
+	grid-area: tabpanel;
+}
+
+.panel, .tablabel {
+	padding: 1ch;
+}
+
+.tabradio:checked+.panel {
+	display: block;
+}
