@@ -110,3 +110,7 @@ button:focus {
 *:focus {
 	outline: none;
 }
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
