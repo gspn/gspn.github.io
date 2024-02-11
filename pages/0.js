@@ -38,9 +38,9 @@ export default {
 		tags: ["game", "exe"]
 	},
 	filefrag: {
+		title: "Filefrag",
 		name: "FILEFRAG",
-		tags: ["tool"],
-		ex: true
+		tags: ["tool"]
 	},
 	adwars: {
 		title: "The Ad Wars",
