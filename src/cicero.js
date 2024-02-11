@@ -99,7 +99,7 @@ export default class Cicero {
 		for (const route of this.routes) {
 			const params = this.match(route.fragment, path);
 			if (params) {
-				route.callback(params);
+				route.callback(params, path);
 				return this;
 			}
 		}
@@ -133,25 +133,15 @@ export default class Cicero {
 	}
 
 	match(routePath, currentPath) {
-		// Simple path matching with named fields
-		const routeParts = routePath.split('/');
-		const currentParts = currentPath.split('/');
+		// improved path matching
+		const routereg = new RegExp(
+			`^${routePath
+				.replace(/:([\w]+)/g, "(?<$1>[^\\x00-\\x1f\\x7f <>#%\"{}|\\\\\\^[\\]`;/?:@&=+$,]+)")
+				.replace(/\*([\w]+)/g, "(?<$1>[^\\x00-\\x1f\\x7f <>#%\"{}|\\\\\\^[\\]`;?:@&=+$,]+)")}$`
+		);
 
-		if (routeParts.length !== currentParts.length) return null;
-
-		const params = {};
-		for (const [i, routePart] of routeParts.entries()) {
-			const currentPart = currentParts[i];
-
-			if (routePart.startsWith(':')) {
-				const paramName = routePart.slice(1);
-				params[paramName] = currentPart;
-			} else if (routePart !== currentPart) {
-				return null;
-			}
-		}
-
-		return params;
+		const match = currentPath.match(routereg);
+		return match ? match.groups || {} : null;
 	}
 
 	start() {
