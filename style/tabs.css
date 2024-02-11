@@ -16,22 +16,22 @@
 	display: none;
 }
 
-.tabs > .tabbar {
+.tabbar {
 	display: flex;
 	flex-flow: row nowrap;
+	border: 4px solid #ffffff4f;
 	grid-area: tabbar;
 }
 
 .tablabel {
 	width: fit-content;
-	border: 1px solid #ffffff4f;
+	border-right: 4px solid #ffffff4f;
 	cursor: pointer;
 	grid-area: tabbar;
 }
 
 .panel {
 	display: none;
-	width: 100%;
 	grid-area: tabpanel;
 }
 
