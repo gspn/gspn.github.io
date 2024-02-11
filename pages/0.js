@@ -46,6 +46,16 @@ export default {
 		title: "The Ad Wars",
 		name: "THE AD WARS (ADBLOCKERS)",
 		tags: ["tool", "privacy", "article"]
+	},
+	// ggst: {
+	// 	title: "-STRIVE-",
+	// 	name: "GUILTY GEAR -STRIVE-",
+	// 	tags: ["game", "exe", "ost"]
+	// },
+	lom: {
+		title: "LoM",
+		name: "LORD OF MYSTERIES",
+		tags: ["book", "comic"]
 	}
 };
 /**
