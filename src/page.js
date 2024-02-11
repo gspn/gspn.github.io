@@ -45,6 +45,7 @@ route
 	.route("/config", () => loadPage("config"))
 
 	.route("/pages/:key/", (params) => loadPage(params.key))
+	.route("/pages/:key/*rest", (params, path) => (window.open(path), history.back()))
 
 	.start();
 
