@@ -1,0 +1,10 @@
+name: gssb.x86_64
+description: Props for trying it. Linux x86_64 executable.
+mirrors:
+  default:
+    type: list
+    uris: 
+      - https://gspn.github.io/pages/gssb/v1/linux/gssb-frag0.bin
+      - https://gspn.github.io/pages/gssb/v1/linux/gssb-frag1.bin
+      - https://gspn.github.io/pages/gssb/v1/linux/gssb-frag2.bin
+      - https://gspn.github.io/pages/gssb/v1/linux/gssb-frag3.bin
