@@ -1,0 +1,16 @@
+name: example.7z
+description: Tell us something about the file here!
+mirrors:
+  default:
+    type: strip # "strip" types use numbered extensions of .001+ use a root and length
+    length: 6 # 6 parts, so from *.001 to *.006
+    root: https://fileserver.example.com/example.7z # this root will get the strip number aded to the end
+  absolute:
+    type: list # "list" uses a simple list of hardcoded URIs
+    uris:
+      - https://files2.example.com/example.7z.001
+      - https://files2.example.com/example.7z.002
+      - https://otherfilehost.com/still.003 # hardcoding allows to spread the parts
+      - https://files2.example.com/example.7z.004
+      - https://files2.example.com/example.7z.005
+      - https://files2.example.com/example.7z.006

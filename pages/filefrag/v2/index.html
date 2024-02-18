@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FileFrags</title>
+
+	<link rel="stylesheet" href="/style/shadow.css">
+	<link rel="stylesheet" href="/style/tabs.css">
+	<script src="./src/index.js" type="module" defer></script>
+</head>
+<body>
+	<h1>FileFrag v2</h1>
+	<h2>split and stitch files, but better</h2>
+	<div class="tabs" style="width:100%">
+		<div class="tabbar">
+			<label for="tab1" class="tablabel">Download</label>
+			<label for="tab2" class="tablabel">Split</label>
+			<label for="tab3" class="tablabel">Docs</label>
+		</div>
+
+		<input type="radio" class="tabradio" name="fragv2tabs" id="tab1">
+		<div class="panel">
+			<b>Download from record</b><br>
+			----------------------------------------<br><br>
+			Record file to read<br>
+			<input type="file" id="record-dl-in" accept=".ff.yaml">
+			<button id="record-dl-read">Read record</button><br>
+			----------------------------------------<br><br>
+			<b></b>
+			Download<br>
+			<p id="record-dl-content" style="background:#ffffff4f;width:24rem;display:block">No record read</p>
+			<p style="background:#ffffff4f;width:48rem;display:block">
+				<span id="record-dl-permlog"></span><br>
+				<span id="record-dl-templog"></span>
+			</p>
+			----------------------------------------<br><br>
+			<b>Log</b><br>
+			<p id="record-dl-log" style="background:#ffffff4f;width:24rem;display:block">None loaded</p>
+		</div>
+
+		<input type="radio" class="tabradio" id="tab2" name="fragv2tabs">
+		<div class="panel">
+			<b>Split file into fragments</b><br>
+			----------------------------------------<br><br>
+			<input type="file" id="split-in"><br>
+			<input type="text" id="split-size" placeholder="block size (kB)">
+			<button id="split-submit">Split & download file</button>
+			----------------------------------------<br><br>
+			<b>Log</b><br>
+			<p id="split-log" style="background:#ffffff4f;width:24rem;display:block">None loaded</p>
+		</div>
+
+		<input type="radio" class="tabradio" id="tab3" name="fragv2tabs">
+		<div class="panel">
+			<b>Some documents or something</b><br>
+			----------------------------------------<br><br>
+			Download<br>
+			I was tired of making buttons, so you have a command line now.<br>
+			Just write the name of the mirror you want to download in.<br>
+			<br>
+			Split<br>
+			It says it on the tupperware; specify a block size in kB, put a file in, press the button.
+		</div>
+	</div>
+</body>
+</html>
