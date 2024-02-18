@@ -1,0 +1,7 @@
+name: Necessary_Discrepancy_FLAC.7z
+description: High quality FLACs of the Guilty Gear -STRIVE- OST as of 2023/12/17
+mirrors:
+  default:
+    type: strip
+    length: 45
+    root: https://gspn.github.io/pages/ggst/ost_necessary_discrepancy_flac/Necessary_Discrepancy_FLAC.7z
