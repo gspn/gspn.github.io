@@ -47,11 +47,11 @@ export default {
 		name: "THE AD WARS (ADBLOCKERS)",
 		tags: ["tool", "privacy", "article"]
 	},
-	// ggst: {
-	// 	title: "-STRIVE-",
-	// 	name: "GUILTY GEAR -STRIVE-",
-	// 	tags: ["game", "exe", "ost"]
-	// },
+	ggst: {
+		title: "-STRIVE-",
+		name: "GUILTY GEAR -STRIVE-",
+		tags: ["game", "exe", "ost"]
+	},
 	lom: {
 		title: "LoM",
 		name: "LORD OF MYSTERIES",
