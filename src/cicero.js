@@ -3,11 +3,9 @@
 export default class Cicero {
 	/**
 	 * Creates a cicero router instance
-	 * @param {String} root The root of the application that will use the router. Defaults to /.
 	 */
-	constructor(root = "/") {
+	constructor() {
 		this.routes = [];
-		this.root = root;
 	}
 
 	//
@@ -20,10 +18,11 @@ export default class Cicero {
 	 * @param {Function} callback The callack for the route
 	 * @returns the router instance
 	 */
-	route(fragment, callback) {
+	route(fragment, callback, sethash = true) {
 		const route = {
 			fragment,
 			callback,
+			sethash
 		};
 		this.routes.push(route);
 		return this;
@@ -45,7 +44,7 @@ export default class Cicero {
 	 * @param {String} path The path to redirect to
 	 */
 	redirect(fragment, path) {
-		return this.route(fragment, () => this.navigateTo(path) && this.navigate());
+		return this.route(fragment, () => this.navigate(path, true), false);
 	}
 
 	//
@@ -59,7 +58,7 @@ export default class Cicero {
 	 */
 	async loadPage(uri, target = document.body) {
 		const html = await fetch(uri).then(res => res.text());
-		const newdoc = formatDocument(html);
+		const newdoc = new DOMParser().parseFromString(html, 'text/html');
 
 		// merge heads
 		document.head.append(...newdoc.head.childNodes);
@@ -68,13 +67,6 @@ export default class Cicero {
 		target.innerHTML = "";
 		target.append(...newdoc.body.childNodes);
 		target.querySelectorAll("script").forEach(Cicero.replaceAndRunScript);
-
-		//
-		// helpers (mostly ripped from fireship's flamethrower)
-		function formatDocument(html) {
-			const parser = new DOMParser();
-			return parser.parseFromString(html, 'text/html');
-		}
 	}
 	static replaceAndRunScript(oldScript) {
 		const newScript = document.createElement('script');
@@ -93,20 +85,23 @@ export default class Cicero {
 	/**
 	 * Navigate to the route defined by the current hash
 	 */
-	navigate() {
-		const path = this.currentPath();
+	navigate(fragment, init) {
+		const path = this.formatPath(fragment).pathname;
+
+		if (fragment == undefined) throw new Error("why?");
+
+		if (this.currentPath() == path && !init) return false;
 
 		for (const route of this.routes) {
 			const params = this.match(route.fragment, path);
 			if (params) {
 				route.callback(params, path);
+				if (route.sethash) this.navigateTo(fragment);
 				return this;
 			}
 		}
 
-		// If no matching route found, perform default navigation
-		//window.location.href = this.root + path;
-		return this;
+		return true;
 	}
 
 	/**
@@ -114,14 +109,30 @@ export default class Cicero {
 	 * @param {String} fragment the path to navigate to
 	 */
 	navigateTo(fragment) {
-		location.hash = new URL(
+		const path = this.formatPath(fragment).pathname;
+
+		if (path == this.currentPath()) return false;
+
+		const here = sessionStorage.ciceronow++ + 1
+		history.pushState({ ciceronow: here }, null, "#" + path);
+		this.onState();
+
+		return true;
+	}
+
+	/**
+	 * Creates a URL resulting from navigating from the current hash path with the fragment 
+	 * @param {String} fragment any url path
+	 * @returns {URL}
+	 */
+	formatPath(fragment) {
+		return new URL(
 			fragment,
 			new URL(
 				this.currentPath(),
-				"http://foo"
+				location.origin
 			)
-		).pathname;
-		return true;
+		)
 	}
 
 	/**
@@ -144,8 +155,22 @@ export default class Cicero {
 		return match ? match.groups || {} : null;
 	}
 
+	onState() {
+		const past = !!+sessionStorage.ciceropast;
+		const here = +history.state?.ciceronow;
+		const now = +sessionStorage.ciceronow;
+
+		const ispast = here < now;
+		sessionStorage.ciceropast = +ispast;
+
+		this.navigate(this.currentPath(), ispast || (past && here == now));
+	}
+
 	start() {
-		this.navigate();
+		if (!("ciceronow" in sessionStorage)) sessionStorage.ciceronow = 0;
+		if (!("ciceropast" in sessionStorage)) sessionStorage.ciceropast = 0;
+
+		this.navigate(this.currentPath(), true);
 
 		// Capture clicks on <a> links and use the router's route if available
 		document.addEventListener('click', (e) => {
@@ -162,12 +187,15 @@ export default class Cicero {
 				) return;
 
 				e.preventDefault();
-				this.navigateTo(href);
+
+				sessionStorage.ciceropast = 0;
+				this.navigate(href);
 			}
 		});
 
 		// Listen for state changes
-		window.addEventListener('popstate', () => this.navigate());
+		window.addEventListener('popstate', e => this.onState(e));
+		window.addEventListener('pushstate', e => this.onState(e));
 
 		return this;
 	};
