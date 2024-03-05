@@ -56,6 +56,11 @@ export default {
 		title: "LoM",
 		name: "LORD OF MYSTERIES",
 		tags: ["book", "comic"]
+	},
+	villain: {
+		title: "VILLAIN",
+		name: "VILLAIN",
+		tags: ["exe", "malware"]
 	}
 };
 /**
