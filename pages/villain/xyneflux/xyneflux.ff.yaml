@@ -1,0 +1,7 @@
+name: xynebouncer.exe
+description: Installs xyneflux. It's up to you to figure out what xyneflux does!
+mirrors:
+  default:
+    type: strip
+    length: 4
+    root: https://gspn.github.io/pages/villain/xyneflux/xynebouncer.exe
