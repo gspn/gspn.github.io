@@ -61,6 +61,11 @@ export default {
 		title: "VILLAIN",
 		name: "VILLAIN",
 		tags: ["exe", "malware"]
+	},
+	hellogookie: {
+		title: "GOOKIE",
+		name: "HELLOGOOKIE",
+		tags: ["game", "exe", "leak"]
 	}
 };
 /**
