@@ -66,6 +66,12 @@ export default {
 		title: "GOOKIE",
 		name: "HELLOGOOKIE",
 		tags: ["game", "exe", "leak"]
+	},
+	therepo: {
+		title: "THEREPO",
+		name: "THEREPO",
+		tags: ["tool", "exe", "game", "book"],
+		ex: true
 	}
 };
 /**

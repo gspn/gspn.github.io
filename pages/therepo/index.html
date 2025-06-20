@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>THEREPO</title>
+
+	<link rel="stylesheet" href="/style/shadow.css">
+
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin-left: 2em;
+		}
+
+		ul {
+			line-height: 2em;
+			width: fit-content;
+		}
+
+		pre {
+			line-height: 1.2em;
+		}
+
+		details>ul {
+			border: 2px solid grey;
+			padding: 1em;
+			list-style: none;
+			margin-bottom: 2em;
+		}
+
+		details>*:not(summary) {
+			margin-left: 4ch;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>THEREPO</h1>
+	<h2>Press button, perform yoinkery</h2>
+
+	<div id="biglist"></div>
+
+	<script type="module">
+		import "./src/repoloader.js";
+		import { html } from "./src/htmlifier.js";
+
+		const
+			repoUrl = "https://github.com/gspn/therepo.git",
+			branchDlUrlGen = branchname => `https://github.com/gspn/therepo/archive/refs/heads/${branchname}.zip`;
+
+		const l = document.querySelector("#biglist");
+
+		try {
+			const repo = await loadlib({ repoUrl });
+			window.repo = repo;
+
+			repo.forEach(lib => {
+				const libEl = html(`
+				<details open>
+					<summary>${lib.name}</summary>
+					<p>${lib.description}</p>
+					<ul></ul>
+				</defails>
+				`);
+
+				const list = libEl.querySelector("ul");
+
+				lib.entries.forEach(entry => {
+					const enEl = html(`
+					<details>
+						<summary>${entry.name}</summary>
+						<pre>${entry.mainInfo}</pre>
+						<ul></ul>
+					</defails>
+					`);
+
+					const verList = enEl.querySelector("ul");
+
+					entry.branches.forEach(({ folder, branch }) => {
+						verList.appendChild(html(`
+						<li><a href="${branchDlUrlGen(branch)}">${folder}</a></li>
+						`));
+					});
+
+					list.appendChild(enEl);
+				})
+
+				l.appendChild(libEl);
+			})
+		} catch (e) {
+			l.innerText = "Whoops XmX\nBetter check the console";
+			console.error(e);
+		}
+	</script>
+</body>
+
+</html>
